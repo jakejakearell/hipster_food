@@ -1,10 +1,27 @@
 class Event
-  attr_reader :parameter1,
-              :parameter2
+  attr_reader :name,
+              :food_trucks
 
-  def initialize(parameter1, parameter2)
-    @parameter1 = parameter1
-    @parameter2 = parameter2
+
+  def initialize(name)
+    @name = name
+    @food_trucks = []
+  end
+
+  def add_food_truck(food_truck)
+    @food_trucks << food_truck
+  end
+
+  def food_truck_names
+    @food_trucks.map do |truck|
+      truck.name
+    end
+  end
+
+  def food_trucks_that_sell(item)
+    @food_trucks.find_all do |truck|
+      truck.inventory.include? item
+    end
   end
 
 end
