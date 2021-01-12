@@ -17,6 +17,4 @@ class ItemTest < Minitest::Test
     assert_equal "Apple Pie", @item.name
     assert_equal 2.50, @item.price
   end
-
-
 end

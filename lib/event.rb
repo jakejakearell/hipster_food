@@ -24,4 +24,26 @@ class Event
     end
   end
 
+
+  def sorted_item_list
+    self.food_trucks.flat_map do |truck|
+      truck.inventory.flat_map do |inventory|
+        inventory[0].name
+      end
+    end.uniq
+  end
+
+  def total_inventory
+    self.food_trucks.reduce(Hash.new) do |memo, truck|
+      truck.inventory.each do |item|
+        if memo[item].nil?
+          memo[item] ={food_truck: [truck],
+                      quantity: item.last}
+        elsif memo[item]
+          memo[item][:quantity] += item.last
+        end
+      end
+    memo
+    end
+  end
 end
